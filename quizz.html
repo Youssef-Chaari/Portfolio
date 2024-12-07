@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizz : Culture Tunisienne</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function calculateScore() {
+            // Les réponses correctes
+            const correctAnswers = [
+                "b", "a", "d", "c", "a", 
+                "b", "d", "a", "c", "b"
+            ];
+            let score = 0;
+            const totalQuestions = correctAnswers.length;
+
+            // Récupérer le formulaire
+            const form = document.getElementById("quiz-form");
+            const userAnswers = new FormData(form);
+
+            // Parcourir les réponses et comparer
+            correctAnswers.forEach((correctAnswer, index) => {
+                const userAnswer = userAnswers.get(`q${index + 1}`);
+                if (userAnswer === correctAnswer) {
+                    score++;
+                }
+            });
+
+            // Afficher le score
+            const resultSection = document.getElementById("result");
+            resultSection.innerHTML = `
+                <h2>Votre Score : ${score} / ${totalQuestions}</h2>
+                <h3>Réponses Correctes :</h3>
+                <ol>
+                    <li>Question 1 : b</li>
+                    <li>Question 2 : a</li>
+                    <li>Question 3 : d</li>
+                    <li>Question 4 : c</li>
+                    <li>Question 5 : a</li>
+                    <li>Question 6 : b</li>
+                    <li>Question 7 : d</li>
+                    <li>Question 8 : a</li>
+                    <li>Question 9 : c</li>
+                    <li>Question 10 : b</li>
+                </ol>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Quizz : Culture Tunisienne</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="parcours.html">Parcours</a></li>
+                <li><a href="competences.html">Compétences</a></li>
+                <li><a href="stages.html">Stages</a></li>
+                <li><a href="matieres.html">Matières & Projets</a></li>
+                <li><a href="passions_sports_qualites.html">Passions, Sports et Qualités</a></li>
+                <li><a href="quizz.html">Quizz</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="temoignages.html">Témoignages</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+        <section class="quiz-section">
+            <h2>Répondez aux questions ci-dessous :</h2>
+            <form id="quiz-form" onsubmit="event.preventDefault(); calculateScore();">
+                <div class="question">
+                    <p>1. Quelle est la capitale de la Tunisie ?</p>
+                    <label><input type="radio" name="q1" value="a"> Sfax</label>
+                    <label><input type="radio" name="q1" value="b"> Tunis</label>
+                    <label><input type="radio" name="q1" value="c"> Hammamet</label>
+                    <label><input type="radio" name="q1" value="d"> Djerba</label>
+                </div>
+                <div class="question">
+                    <p>2. Quelle est la monnaie utilisée en Tunisie ?</p>
+                    <label><input type="radio" name="q2" value="a"> Dinar</label>
+                    <label><input type="radio" name="q2" value="b"> Euro</label>
+                    <label><input type="radio" name="q2" value="c"> Dollar</label>
+                    <label><input type="radio" name="q2" value="d"> Livre</label>
+                </div>
+                <div class="question">
+                    <p>3. Quelle est la langue officielle de la Tunisie ?</p>
+                    <label><input type="radio" name="q3" value="a"> Français</label>
+                    <label><input type="radio" name="q3" value="b"> Anglais</label>
+                    <label><input type="radio" name="q3" value="c"> Italien</label>
+                    <label><input type="radio" name="q3" value="d"> Arabe</label>
+                </div>
+                <div class="question">
+                    <p>4. Quel plat est emblématique de la Tunisie ?</p>
+                    <label><input type="radio" name="q4" value="a"> Pizza</label>
+                    <label><input type="radio" name="q4" value="b"> Sushi</label>
+                    <label><input type="radio" name="q4" value="c"> Couscous</label>
+                    <label><input type="radio" name="q4" value="d"> Burger</label>
+                </div>
+                <div class="question">
+                    <p>5. Quel désert se trouve en Tunisie ?</p>
+                    <label><input type="radio" name="q5" value="a"> Sahara</label>
+                    <label><input type="radio" name="q5" value="b"> Kalahari</label>
+                    <label><input type="radio" name="q5" value="c"> Gobi</label>
+                    <label><input type="radio" name="q5" value="d"> Atacama</label>
+                </div>
+                <div class="question">
+                    <p>6. Quel est le port le plus important de Tunisie ?</p>
+                    <label><input type="radio" name="q6" value="a"> Gabès</label>
+                    <label><input type="radio" name="q6" value="b"> Rades</label>
+                    <label><input type="radio" name="q6" value="c"> Monastir</label>
+                    <label><input type="radio" name="q6" value="d"> Mahdia</label>
+                </div>
+                <div class="question">
+                    <p>7. Quand la Tunisie a-t-elle obtenu son indépendance ?</p>
+                    <label><input type="radio" name="q7" value="a"> 1952</label>
+                    <label><input type="radio" name="q7" value="b"> 1945</label>
+                    <label><input type="radio" name="q7" value="c"> 1960</label>
+                    <label><input type="radio" name="q7" value="d"> 1956</label>
+                </div>
+                <div class="question">
+                    <p>8. Quelle ville est célèbre pour son amphithéâtre romain ?</p>
+                    <label><input type="radio" name="q8" value="a"> El Jem</label>
+                    <label><input type="radio" name="q8" value="b"> Sousse</label>
+                    <label><input type="radio" name="q8" value="c"> Bizerte</label>
+                    <label><input type="radio" name="q8" value="d"> Kairouan</label>
+                </div>
+                <div class="question">
+                    <p>9. Quel est le nom du festival du film de Carthage ?</p>
+                    <label><input type="radio" name="q9" value="a"> Festival de Cannes</label>
+                    <label><input type="radio" name="q9" value="b"> Mostra de Venise</label>
+                    <label><input type="radio" name="q9" value="c"> Journées Cinématographiques de Carthage</label>
+                    <label><input type="radio" name="q9" value="d"> Berlinale</label>
+                </div>
+                <div class="question">
+                    <p>10. Quelle est la religion principale en Tunisie ?</p>
+                    <label><input type="radio" name="q10" value="a"> Christianisme</label>
+                    <label><input type="radio" name="q10" value="b"> Islam</label>
+                    <label><input type="radio" name="q10" value="c"> Judaïsme</label>
+                    <label><input type="radio" name="q10" value="d"> Hindouisme</label>
+                </div>
+
+                <button type="submit">Valider</button>
+            </form>
+            <div id="result"></div>
+        </section>
+    </main>
+</body>
+</html>
