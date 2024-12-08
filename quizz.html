@@ -3,54 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizz : Culture Tunisienne</title>
+    <title>Quizz : Football</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        function calculateScore() {
-            // Les réponses correctes
-            const correctAnswers = [
-                "b", "a", "d", "c", "a", 
-                "b", "d", "a", "c", "b"
-            ];
-            let score = 0;
-            const totalQuestions = correctAnswers.length;
-
-            // Récupérer le formulaire
-            const form = document.getElementById("quiz-form");
-            const userAnswers = new FormData(form);
-
-            // Parcourir les réponses et comparer
-            correctAnswers.forEach((correctAnswer, index) => {
-                const userAnswer = userAnswers.get(`q${index + 1}`);
-                if (userAnswer === correctAnswer) {
-                    score++;
+        document.addEventListener("DOMContentLoaded", () => {
+            const questions = [
+                {
+                    question: "Dans quel club italien Francesco Totti a-t-il évolué toute sa carrière de footballeur ?",
+                    options: [
+                        { text: "AC Milan", correct: false },
+                        { text: "AS Rome", correct: true },
+                        { text: "Lazio Rome", correct: false },
+                        { text: "Juventus", correct: false }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/Francesco-Totti-at-Italy-500x347.jpg.webp"
+                },
+                {
+                    question: "Quel est le nom complet du joueur de football brésilien connu sous le nom Neymar passé par le FC Barcelone et le PSG ?",
+                    options: [
+                        { text: "Neymar Arantes do Nascimento", correct: false },
+                        { text: "Neymar Luis Nazario de Lima", correct: false },
+                        { text: "Neymar Izecson dos Santos Leite", correct: false },
+                        { text: "Neymar de Silva Santos Junior", correct: true }
+                    ],
+                    image: "https://wordpresscdn.winzogames.com/prod/blog/wp-content/uploads/2024/10/21135539/neymar-jr-net-worth.webp"
+                },
+                {
+                    question: "Dans lequel de ces clubs européens Cristiano Ronaldo n’a-t-il jamais évolué ?",
+                    options: [
+                        { text: "Benfica", correct: true },
+                        { text: "Manchester United", correct: false },
+                        { text: "Sporting Portugal", correct: false },
+                        { text: "Juventus", correct: false }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/GettyImages-1574506572-e1691867920457-500x500.jpgw1200h1200crop1"
+                },
+                {
+                    question: "Sur quel score le Bayern Munich de Robert Lewandowski a-t-il battu le FC Barcelone de Lionel Messi en Ligue des champions en 2020 ?",
+                    options: [
+                        { text: "6-0", correct: false },
+                        { text: "5-1", correct: false },
+                        { text: "7-1", correct: false },
+                        { text: "8-2", correct: true }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/b1ab9690-de6f-11ea-a8fd-fa6f42862b5c-500x337."
+                },
+                {
+                    question: "À quel poste évolue Kim Min-jae, transféré de Naples vers le Bayern Munich en 2023 ?",
+                    options: [
+                        { text: "Gardien", correct: false },
+                        { text: "Defenseur central", correct: true },
+                        { text: "Milieu droit", correct: false },
+                        { text: "Attaquant de pointe", correct: false }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/GettyImages-2005682887-e1709589639917-500x333.jpg.webp"
+                },
+                {
+                    question: "Dans quel club français Karim Benzema a-t-il débuté sa carrière avant de connaître ses plus belles années au Real Madrid ?",
+                    options: [
+                        { text: "Olympique lyonnais", correct: true },
+                        { text: "Olympique de Marseille", correct: false },
+                        { text: "Paris Saint-Germain", correct: false },
+                        { text: "Monaco", correct: false }
+                    ],
+                    image: "https://static1.purepeople.com/articles/2/50/49/22/@/7361438-karim-benzema-a-encore-realise-un-match-580x0-5.jpg"
+                },
+                {
+                    question: "En 2018, dans quel stade de football Cristiano Ronaldo a-t-il inscrit un but en retournée acrobatique en quart de finale de Ligue des champions ?",
+                    options: [
+                        { text: "Juventus Stadium", correct: true },
+                        { text: "Santiago Bernabeu", correct: false },
+                        { text: "Camp Nou", correct: false },
+                        { text: "San Siro", correct: false }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/K6PNRBGIIZMHKYIC6YOOF6YOSU-500x329.jpg.webp"
+                },
+                {
+                    question: "Quel gardien de but du Bayern Munich a terminé troisième derrière Ronaldo et Messi au classement du Ballon d’Or en 2014 ?",
+                    options: [
+                        { text: "Iker Casillas", correct: false },
+                        { text: "Manuel Neuer", correct: true },
+                        { text: "Gianluigi Buffon", correct: false },
+                        { text: "Petr Čech", correct: false }
+                    ],
+                    image: "https://scontent.ftun14-1.fna.fbcdn.net/v/t39.30808-6/230871615_4505033922882752_2416014031844685854_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=yg8j16sdutQQ7kNvgF7GzS3&_nc_zt=23&_nc_ht=scontent.ftun14-1.fna&_nc_gid=Ad5QVoJ0kottHn_Xs2Ids19&oh=00_AYCCQMYmREgIl-d9ZKDrpdgkWQfHrK1hXvWbSfBM5dctyA&oe=675B14DF"
+                },
+                {
+                    question: "En quelle année Lionel Messi a-t-il remporté son premier Ballon d’or avec le FC Barcelone ?",
+                    options: [
+                        { text: "2011", correct: false },
+                        { text: "2014", correct: false },
+                        { text: "2009", correct: true },
+                        { text: "2012", correct: false }
+                    ],
+                    image: "https://www.fcbarcelona.com/fcbarcelona/photo/2019/11/30/a04d10f7-29f2-4760-b5d4-c050e3f5b247/mini_555528_mounic_046.jpg"
+                },
+                {
+                    question: "Quel record Kylian Mbappé a-t-il égalé le 21 août 2023 dans un match de Ligue 1 face à Lille avec le PSG ?",
+                    options: [
+                        { text: "Record du nombre de corners rentrants en Ligue 1", correct: false },
+                        { text: "But le plus rapide", correct: true },
+                        { text: "Nombre de buts marqués en 1 match", correct: false },
+                        { text: "Nombre de buts et passes décisives en un match", correct: false }
+                    ],
+                    image: "https://www.culturequizz.com/wp-content/uploads/2024/06/3436692-70119008-2560-1440-500x281.jpg.webp"
                 }
-            });
+            ];
 
-            // Afficher le score
-            const resultSection = document.getElementById("result");
-            resultSection.innerHTML = `
-                <h2>Votre Score : ${score} / ${totalQuestions}</h2>
-                <h3>Réponses Correctes :</h3>
-                <ol>
-                    <li>Question 1 : b</li>
-                    <li>Question 2 : a</li>
-                    <li>Question 3 : d</li>
-                    <li>Question 4 : c</li>
-                    <li>Question 5 : a</li>
-                    <li>Question 6 : b</li>
-                    <li>Question 7 : d</li>
-                    <li>Question 8 : a</li>
-                    <li>Question 9 : c</li>
-                    <li>Question 10 : b</li>
-                </ol>
-            `;
-        }
+            let currentQuestionIndex = 0;
+            let score = 0;
+            const userAnswers = [];
+
+            const quizContainer = document.getElementById("quiz-container");
+            const questionText = document.getElementById("question-text");
+            const questionImage = document.getElementById("question-image");
+            const optionsContainer = document.getElementById("options-container");
+            const resultContainer = document.getElementById("result");
+
+            function showQuestion(index) {
+                const question = questions[index];
+                questionText.textContent = question.question;
+                questionImage.src = question.image;
+                optionsContainer.innerHTML = "";
+
+                question.options.forEach((option, i) => {
+                    const button = document.createElement("button");
+                    button.textContent = option.text;
+                    button.classList.add("option");
+                    button.addEventListener("click", () => handleAnswer(option.correct, option.text));
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function handleAnswer(isCorrect, userAnswer) {
+                userAnswers.push({
+                    question: questions[currentQuestionIndex].question,
+                    userAnswer,
+                    correctAnswer: questions[currentQuestionIndex].options.find(opt => opt.correct).text
+                });
+
+                if (isCorrect) score++;
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < questions.length) {
+                    showQuestion(currentQuestionIndex);
+                } else {
+                    showResult();
+                }
+            }
+
+            function showResult() {
+                quizContainer.style.display = "none";
+
+                const resultHTML = `
+                    <h2>Quizz Terminé !</h2>
+                    <p>Votre Score : ${score} / ${questions.length}</p>
+                    <h3>Réponses Correctes :</h3>
+                    <ol>
+                        ${userAnswers.map(answer => `
+                            <li>
+                                <strong>${answer.question}</strong><br>
+                                Votre réponse : <span style="color: ${answer.userAnswer === answer.correctAnswer ? '#28a745' : '#dc3545'}">
+                                    ${answer.userAnswer}
+                                </span><br>
+                                Réponse correcte : <span style="color: #007BFF">${answer.correctAnswer}</span>
+                            </li>
+                        `).join('')}
+                    </ol>
+                `;
+                resultContainer.innerHTML = resultHTML;
+                resultContainer.style.display = "block";
+            }
+
+            showQuestion(currentQuestionIndex);
+        });
     </script>
 </head>
 <body>
     <header>
-        <h1>Quizz : Culture Tunisienne</h1>
+        <h1>Quizz : Football</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
@@ -64,88 +195,20 @@
                 <li><a href="temoignages.html">Témoignages</a></li>
             </ul>
         </nav>
-
     </header>
 
     <main>
-        <section class="quiz-section">
-            <h2>Répondez aux questions ci-dessous :</h2>
-            <form id="quiz-form" onsubmit="event.preventDefault(); calculateScore();">
-                <div class="question">
-                    <p>1. Quelle est la capitale de la Tunisie ?</p>
-                    <label><input type="radio" name="q1" value="a"> Sfax</label>
-                    <label><input type="radio" name="q1" value="b"> Tunis</label>
-                    <label><input type="radio" name="q1" value="c"> Hammamet</label>
-                    <label><input type="radio" name="q1" value="d"> Djerba</label>
-                </div>
-                <div class="question">
-                    <p>2. Quelle est la monnaie utilisée en Tunisie ?</p>
-                    <label><input type="radio" name="q2" value="a"> Dinar</label>
-                    <label><input type="radio" name="q2" value="b"> Euro</label>
-                    <label><input type="radio" name="q2" value="c"> Dollar</label>
-                    <label><input type="radio" name="q2" value="d"> Livre</label>
-                </div>
-                <div class="question">
-                    <p>3. Quelle est la langue officielle de la Tunisie ?</p>
-                    <label><input type="radio" name="q3" value="a"> Français</label>
-                    <label><input type="radio" name="q3" value="b"> Anglais</label>
-                    <label><input type="radio" name="q3" value="c"> Italien</label>
-                    <label><input type="radio" name="q3" value="d"> Arabe</label>
-                </div>
-                <div class="question">
-                    <p>4. Quel plat est emblématique de la Tunisie ?</p>
-                    <label><input type="radio" name="q4" value="a"> Pizza</label>
-                    <label><input type="radio" name="q4" value="b"> Sushi</label>
-                    <label><input type="radio" name="q4" value="c"> Couscous</label>
-                    <label><input type="radio" name="q4" value="d"> Burger</label>
-                </div>
-                <div class="question">
-                    <p>5. Quel désert se trouve en Tunisie ?</p>
-                    <label><input type="radio" name="q5" value="a"> Sahara</label>
-                    <label><input type="radio" name="q5" value="b"> Kalahari</label>
-                    <label><input type="radio" name="q5" value="c"> Gobi</label>
-                    <label><input type="radio" name="q5" value="d"> Atacama</label>
-                </div>
-                <div class="question">
-                    <p>6. Quel est le port le plus important de Tunisie ?</p>
-                    <label><input type="radio" name="q6" value="a"> Gabès</label>
-                    <label><input type="radio" name="q6" value="b"> Rades</label>
-                    <label><input type="radio" name="q6" value="c"> Monastir</label>
-                    <label><input type="radio" name="q6" value="d"> Mahdia</label>
-                </div>
-                <div class="question">
-                    <p>7. Quand la Tunisie a-t-elle obtenu son indépendance ?</p>
-                    <label><input type="radio" name="q7" value="a"> 1952</label>
-                    <label><input type="radio" name="q7" value="b"> 1945</label>
-                    <label><input type="radio" name="q7" value="c"> 1960</label>
-                    <label><input type="radio" name="q7" value="d"> 1956</label>
-                </div>
-                <div class="question">
-                    <p>8. Quelle ville est célèbre pour son amphithéâtre romain ?</p>
-                    <label><input type="radio" name="q8" value="a"> El Jem</label>
-                    <label><input type="radio" name="q8" value="b"> Sousse</label>
-                    <label><input type="radio" name="q8" value="c"> Bizerte</label>
-                    <label><input type="radio" name="q8" value="d"> Kairouan</label>
-                </div>
-                <div class="question">
-                    <p>9. Quel est le nom du festival du film de Carthage ?</p>
-                    <label><input type="radio" name="q9" value="a"> Festival de Cannes</label>
-                    <label><input type="radio" name="q9" value="b"> Mostra de Venise</label>
-                    <label><input type="radio" name="q9" value="c"> Journées Cinématographiques de Carthage</label>
-                    <label><input type="radio" name="q9" value="d"> Berlinale</label>
-                </div>
-                <div class="question">
-                    <p>10. Quelle est la religion principale en Tunisie ?</p>
-                    <label><input type="radio" name="q10" value="a"> Christianisme</label>
-                    <label><input type="radio" name="q10" value="b"> Islam</label>
-                    <label><input type="radio" name="q10" value="c"> Judaïsme</label>
-                    <label><input type="radio" name="q10" value="d"> Hindouisme</label>
-                </div>
-
-                <button type="submit">Valider</button>
-            </form>
-            <div id="result"></div>
+        <section id="quiz-container">
+            <img id="question-image" src="" alt="Question Image" class="question-image">
+            <p id="question-text" class="question-text"></p>
+            <div id="options-container" class="options-container"></div>
         </section>
+
+        <section id="result" style="display: none;"></section>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Youssef Chaari. Tous droits réservés.</p>
+    </footer>
 </body>
 </html>
